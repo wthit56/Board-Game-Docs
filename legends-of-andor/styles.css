@@ -1,0 +1,9 @@
+header {}
+	header h1 {display:inline;}
+
+.story {font-style:italic;}
+[data-requirements] {display:none;}
+button {display:inline; margin:0.1em 0;}
+button[data-requirements] {display:inline;}
+button[data-used] {text-decoration:underline;}
+.shown {display:inherit;}
