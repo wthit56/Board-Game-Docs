@@ -1,3 +1,5 @@
+document.body.classList.add("js");
+
 var state, forEach = Array.prototype.forEach, slice = Array.prototype.slice, map = Array.prototype.map;
 on(window, "load", function() {
 	var name = "bgd-loa-asw";

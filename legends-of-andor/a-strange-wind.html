@@ -4,237 +4,256 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link href="styles.css" rel="stylesheet" type="text/css" />
 		<script src="utils.js" type="text/javascript"></script>
-		<script src="script.js" type="text/javascript"></script>
 	</head>
 	<body>
-		<header>
-			<h1>Legend 6: A Strange Wind</h1>
-			[<a href="http://boardgamegeek.com/thread/1248756/fan-made-legend">source</a>] <button id="reset">Reset Legend</button>
-		</header>
-		<div class="story">
-			<p>The Queen and Prince Thorald have declared a time of celebration; great levity can be found throughout the whole of the kingdom. The masses were saved from the terror of the Mighty Dragon and the kingdom was again at peace and free from the plottings of the Dark Mage Varkur. The Heroes were enjoying some well-deserved time off at the local tavern, as the Prince himself led them in drinking games and endless rounds of songs.</p>
-			<p>It was barely dawn and the sun was just about to peak over the horizon, the heroes were just waking from their drunken slumbers and approaching the innkeeper to order their first round of the day when an unnatural wind threw open the door and pushed through the inn, sending a chill down the spine of everyone inside. When it finally died down, the heroes swore they could hear a voice calling to them, saying &ldquo;Darkness is alive, inside...&rdquo;</p>
-			<p>Just as the heroes were going to comment about the strangely familiar disembodied voice, a young man came running through the doorway. &ldquo;Heroes come quickly! There is a battlement forming at the tree of songs!&rdquo;</p>
-			<p>&ldquo;That wind was trying to tell us something..&rdquo; said the first hero pensively.</p>
-			<p>&ldquo;Don&rsquo;t be ridiculous,&rdquo; said the other &ldquo;The air cannot speak, come! To the forest, and to Glory!&rdquo;</p>
-		</div>
-		<p>Follow the standard setup instructions. Place a star token on space B and E of the legend track. Determine the locations of <strong>5 rune stones</strong> and <strong>2 medicinal herbs.</strong> Roll a die to place <strong>5 monster tiles</strong> on the legend track. If the witch token is discovered the heroes receive one free bottle of brew as usual, but are unable to purchase any more; do not place the witch figure in the space, but instead mark the space with a star token. It is assumed that she isn&rsquo;t home and the heroes just find a bottle laying about.</p>
-		<p>Place the tower piece and a <strong>skrall</strong> on space 60. Then place a <strong>Gor</strong> on spaces 59 and 58 (do not move at sunrise)</p>
-		<p>Place your heroes on space 72 with Prince Thorald.</p>
-		<p>Reveal <strong>3 random monster tiles</strong> and place them accordingly.</p>
-		<div class="legend objective">
-			<p>The heroes must defeat the Skrall general and his minions (in spaces 58, 59 and 60) before the legend marker reaches <strong>N</strong> on the legend track or the heroes fail the legend.</p>
-			<p>The Skrall General has a very good vantage point; for each hero in the game the Skralls strength is doubled (ie, 1 hero = 6, 2 heroes = 12, 3 heroes = 18).</p>
-			<p>Each hero starts with <strong>4 strength</strong> points. The party receives <strong>5 gold</strong> and each member may receive 1 item from the merchant inventory for free. The hero with the highest rank goes first.</p>
-		</div>
-		<div class="legend objective">
-			<p>Search the fog to find the witch.</p>
-		</div>
-
-		<div id="log"></div>
-
-		<div id="buttons"><button data-action="time_B = true">B has been Reached</button><button data-requirements="time_B" data-action="time_E = true">E has been Reached</button><button data-requirements="!mid_farm" data-action="skrall = true">Skrall is Defeated</button><button data-requirements="!mid_farm" data-action="witch = true">Witch has been Found</button><button data-action="win = false; end = true;">The Heroes have been Defeated</button></div>
-
-		<div id="branches">
-			<div data-requirements="skrall && farm" class="story">
-				<p>The heroes again revel in their amazing battle prowess and joy in their accomplishments. Just as they take a long sigh of relief the same cold wind as before rushes over the hillside and sinks into their bones. On the wind, the same familiar voice can be heard, whispering &ldquo;Darkness is alive, inside&hellip;&rdquo; The heroes shake themselves.</p>
-				<p>&ldquo;That voice...it&rsquo;s so familiar, who could it be?&rdquo; a hero wonders aloud.</p>
-				<p>A smile creeps onto the other heroes face &ldquo;Aye, let&rsquo;s see, who do we know that deals in all things creepy and magical, and is obsessed with darkness? It&rsquo;s Varkur! The bloody Dark Mage is back!&rdquo; he shouts, and draws his weapon, ready to attack the wind.</p>
-				<p>&ldquo;No&hellip;&rdquo;the other hero whispers. &ldquo;It&rsquo;s not a threat I think it&rsquo;s a warning. But who would warn us about dark magic?&rdquo; The hero doesn&rsquo;t finish, understanding floods through him, and without a word, he begins to run toward the west.</p>
-				<p>&ldquo;Where are you going?!&rdquo; the other hero shouts.</p>
-				<p>&ldquo;Come on!&rdquo; he beckons. &ldquo;We have to find the Witch!&rdquo;</p>
+		<main>
+			<header>
+				<h1>Legend 6: A Strange Wind</h1>
+				<h2>by Jameson Meyer</h2>
+				<nav>[ <a href="http://boardgamegeek.com/thread/1248756/fan-made-legend" target="_blank">source</a> | <a href="./">more legends</a> ]</nav>
+				<button id="reset">Reset Legend</button>
+			</header>
+			<div class="story">
+				<p>The Queen and Prince Thorald have declared a time of celebration; great levity can be found throughout the whole of the kingdom. The masses were saved from the terror of the Mighty Dragon and the kingdom was again at peace and free from the plottings of the Dark Mage Varkur. The Heroes were enjoying some well-deserved time off at the local tavern, as the Prince himself led them in drinking games and endless rounds of songs.</p>
+				<p>It was barely dawn and the sun was just about to peak over the horizon, the heroes were just waking from their drunken slumbers and approaching the innkeeper to order their first round of the day when an unnatural wind threw open the door and pushed through the inn, sending a chill down the spine of everyone inside. When it finally died down, the heroes swore they could hear a voice calling to them, saying &ldquo;Darkness is alive, inside...&rdquo;</p>
+				<p>Just as the heroes were going to comment about the strangely familiar disembodied voice, a young man came running through the doorway. &ldquo;Heroes come quickly! There is a battlement forming at the tree of songs!&rdquo;</p>
+				<p>&ldquo;That wind was trying to tell us something..&rdquo; said the first hero pensively.</p>
+				<p>&ldquo;Don&rsquo;t be ridiculous,&rdquo; said the other &ldquo;The air cannot speak, come! To the forest, and to Glory!&rdquo;</p>
 			</div>
-			<div data-requirements="skrall && !farm" class="story">
-				<p>The heroes again revel in their amazing battle prowess and joy in their accomplishments. Just as they are climbing down from the tower, a soldier appears and tells them that he has been to the farm and found the farmer and his family dead.</p>
-			</div>
-			
-			<div data-requirements="witch">
-				<div class="story">
-					<p>When the heroes reach the witches home, they find it in shambles. They make their way through the small cottage and find furniture overturned and countless bodies of soldiers again bearing the sigil of Reitburg Castle guards.</p>
-					<p>&ldquo;There was a fight here,&rdquo; one hero said. &ldquo;But what are the guards doing so far from the castle?&rdquo;</p>
-					<p>They followed the signs of struggle to the surrounding woods, scorch marks tore into the trees and bodies littered the ground; the smell of burnt wood and flesh hung thickly in the air. The battle seemed to have culminated at a ring of charred earth and timber that formed a circle; five strides wide, around a single body. As they moved closer they recognize it as the prince.</p>
-					<p>Moving him onto his back, the heroes discover that he is still breathing. He opens his eyes slowly, and looks up at them.</p>
-					<p>&ldquo;...too late,&rdquo; he muttered. &ldquo;...too late,&rdquo; the prince moans again before falling unconscious.</p>
-					<p>&ldquo;First the wind speaks, then the Gor organize themselves, Castle guards are killed by other soldiers in the borderlands, now this?!&rdquo; a hero exclaims.</p>
-					<p>&ldquo;Yes,&rdquo; says another, &ldquo;something is definitely amiss in the castle.&rdquo; The hero pulls out the letter they had been carrying. &ldquo;I think it might be time to read this.&rdquo;</p>
-					<p>&ldquo;Are you mad?!&rdquo; replies the other. &ldquo;Only royalty can break a royal seal?! Or it&rsquo;s treason!&rdquo;</p>
-					<p>&ldquo;I guess we have to find a royal, then&hellip;&rdquo;</p>
-				</div>
-				<p>Place the Prince Thorald marker on its side in the location of the Witch fog token. While the prince is wounded, the heroes do not receive a bonus to their attack.</p>
-				<p>The heroes must decide if they want to:</p>
-				<ul>
-					<li>
-						Take the letter and wounded prince to the queen. All heroes and the prince must venture to the Reitburg Castle (space 0). The prince can only move 2 spaces at a time instead of 4 as he is wounded, and he does not give any bonus while in combat.
-					</li>
-					<li>
-						Or wait here for an entire day for the prince to recover and read the letter.
-					</li>
-				</ul>
-				
-				<button data-requirements="!letter" data-action="letter = 'castle'">All Heroes are in the Castle</button>
-				<button data-requirements="!letter" data-action="letter = 'prince'">Wait for the Prince</button>
-			</div>
-			
-			<div data-requirements="letter == 'castle'">
-				<div class="story">
-					<p>The heroes are greeted as they enter the castle grounds and are escorted to the Queen. Upon entering the ornately decorated throne room, the Queen is shocked to see the prince is alive and gives orders for him to be taken to his chambers and heavily guarded.</p>
-					<p>The heroes give her the letter they found.(Remove scroll from inventory and return it to the game box)</p>
-					<p>The Queen opens the letter and sighs audibly. The heroes look at each other in confusion. &ldquo;What&rsquo;s wrong, your majesty?&rdquo; one hero asks.</p>
-					<p>&ldquo;It appears that our plea for help didn&rsquo;t make it,&rdquo; she says.</p>
-					<p>&ldquo;A plea for help? To whom? Is this about the voice we&rsquo;ve been hearing?&rdquo; they ask.</p>
-					<p>&ldquo;It is, but I doubt you will hear it any longer. It appears that the prince has been in league with the Dark Mage Varkur, as his apprentice. He has been using his new powers to alter the mind of the witch Reka to doing his bidding.&rdquo;</p>
-					<p>The heroes gasp in surprise. &ldquo;But her warning?&rdquo;</p>
-					<p>&ldquo;Yes, Reka is very strong&rdquo; the Queen continued, &ldquo;She was able to fight against the prince&rsquo;s powers to try and warn you about him.&rdquo;</p>
-					<p>&ldquo;Darkness is alive, inside&hellip;&rdquo; a hero whispers. &ldquo;She meant inside the castle?&rdquo;</p>
-					<p>The Queen nodded. &ldquo;I&rsquo;m afraid so. We were writing to the keepers of the Tree of Songs to see if they could use their healing magic to help her, but the prince&rsquo;s spies must have found our messenger.&rdquo;</p>
-					<p>The doors to the throne room burst open and a frantic soldier runs up to the queen, falling to his knees. &ldquo;Your majesty! The prince has died from his wounds and the witch is gone!&rdquo;</p>
-					<p>The building rumbles as a scream rings through the castle and echoes off the stone walls.</p>
-					<p>A hero drew his weapon, &ldquo;You have the witch here?!&rdquo; he shouted.</p>
-					<p>&ldquo;Yes,&rdquo; the Queen exclaimed worriedly, &ldquo;I heard her warning, too and sent a regiment of my personal guards to escort her here so she wouldn&rsquo;t have to hide in the woods any longer. They told me that the prince fought them but was eventually killed, so they brought her here until she was well again.&rdquo;</p>
-					<p>Screams shook the building so violently that the glass windows behind the throne shattered.</p>
-					<p>&ldquo;But if he is dead, then why is Reka doing this?!&rdquo; A hero exclaimed.</p>
-					<p>A bolt of lightning shot through the broken windows and into the throne room, sending the heroes and the Queen flying in all directions. As the heroes looked to the center of the room, where the bolt had hit, they saw the witch, she was bathed in purple shadow; her eyes glowing with a fiendish blue hue. &ldquo;Because,&rdquo; she shouted &ldquo;I, Thorald, have taken over the witch&rsquo;s mind completely, and now, the kingdom will be mine!&rdquo;</p>
-				</div>
-				<p>Place the witch figure in the castle (space 0).</p>
-				<div class="legend objective">
-					<p>Defeat the Mad Prince before the legend marker reaches the N tile on the legend track. If the Mad Prince is defeated, immediately move the legend marker to the N tile.</p>
-					<p>The Mad Prince has 9 strength for each hero in play:</p>
-					<table>
-						<thead><tr><th>Heroes</th><th>Willpower</th></tr></thead>
-						<tbody>
-							<tr><td>1</td><td>9</td></tr>
-							<tr><td>2</td><td>18</td></tr>
-							<tr><td>3</td><td>27</td></tr>
-							<tr><td>4</td><td>36</td></tr>
-						</tbody>
-					</table>
-					<p>He starts with 2 black dice, adding same dice results together. If he drops below 7 willpower, he only rolls 1 black die.</p>
-					<p>During battle the Prince steadily grows in power. For each round of battle after the first, the prince&rsquo;s <strong>strength</strong> grows by 5.</p>
-					<button data-requirements="skrall && farm && witch" data-action="win = true; end = true;">Mad Prince has been Defeated</button> <button data-action="win = false; end = true;">Heroes were Defeated</button>
-				</div>
-			</div>
-
-			<div data-requirements="letter === 'prince'">
-				<p>A day passes. Immediately perform all of the tasks in the Sunrise Box (leaving the heroes time markers where they are).</p>
-				<div class="story">
-					<p>After a night of fevered dreams and a full day of care, the prince finally awakens, rested and fully recovered. &ldquo;What...what happened?&rdquo; he asks.</p>
-					<p>&ldquo;That&rsquo;s what we would like to know,&rdquo; replies one of the heroes, handing the prince the letter they found at the farm.
-				</div>
-				<p>Prince Thorald, being healed, now stands up and moves normally. Remove the scroll from your inventory and return it to the game box.</p>
-				<div class="story">
-					<p>The prince opens the letter and reads it with a sorrowful expression. &ldquo;It&rsquo;s as we feared, then,&rdquo;</p>
-					<p>the prince says.</p>
-					<p>&ldquo;What&rsquo;s wrong?&rdquo; a hero asks. &ldquo;Is is about the voice that we&rsquo;ve been hearing?&rdquo;</p>
-					<p>&ldquo;It is,&rdquo; the prince replies, sighing heavily &ldquo;though I doubt you will hear it any longer. It appears that the Queen has been in league with the Dark Mage Varkur, for a long time and has been using her new powers to alter the mind of the witch Reka to do his bidding.&rdquo;</p>
-					<p>The heroes gasp in surprise. &ldquo;But her warning?&rdquo;</p>
-					<p>&ldquo;Yes, Reka is very strong&rdquo; the prince continued, &ldquo;She was able to fight against the Queen&rsquo;s powers to try and warn you about her.&rdquo;</p>
-					<p>&ldquo;Darkness is alive, inside&hellip;&rdquo; a hero whispered. &ldquo;She meant inside the castle?&rdquo;</p>
-					<p>The Prince nodded. &ldquo;I&rsquo;m afraid so. When I heard her scream I knew that they had found her in the woods, where she was hiding, so I came as fast as I could to try and help her. But the Queen was already here with a host of men loyal to her. There were too many, and...and I was too late.&rdquo;</p>
-					<p>&ldquo;Too late,&rdquo; a hero asked, &ldquo;you mean, the witch she&rsquo;s&hellip;&rdquo;</p>
-					<p>The prince shook his head, &ldquo;Not dead, but as good as... The Queen decided that since she couldn&rsquo;t control her, she would absorb her power. The surge from the spell caused a massive explosion and I was knocked out. I don&rsquo;t know if anyone else survived.&rdquo;</p>
-					<p>&ldquo;Well,&rdquo; one hero said happily &ldquo;maybe the Queen died too, problem solved.&rdquo;</p>
-					<p>A long shriek was heard in the distance.</p>
-					<p>&ldquo;Somehow, I doubt it,&rdquo; the prince muttered.</p>
-					<p>The sound grew closer, and echoed through the valley. It was a roar that bellowed deep into the earth followed by a shrill tone that shook your very mind.</p>
-					<p>It was a sound that was all too familiar to the heroes.</p>
-					<p>&ldquo;It can&rsquo;t be&hellip;&rdquo; a hero whispered. &ldquo;She couldn&rsquo;t, could she?! It&rsquo;s impossible!&rdquo;</p>
-					<p>A dark figure flew over them and toward the eastern edge of the forest.</p>
-					<p>&ldquo;She&rsquo;s turned herself into a dragon?!&rdquo; a hero shouted.</p>
-					<p>&ldquo;Yes!&rdquo; yelled the prince, &ldquo; and she is heading for the Tree of Songs, with Reka gone, it&rsquo;s the only place left in the kingdom with enough magic to stop her, hurry! There is not a moment to waste!&rdquo;</p>
-				</div>
-				<p>Place the Dragon and Prince Thorald at the Tree of Songs (space 57), the Dragon does not move at sunrise.</p>
-				<div class="legend objective">
-					<p>Defeat the Dragon Queen before the legend marker reaches the N tile on the legend track.</p>
-					<p>The Dragon Queen has 15 strength for each hero in play.</p>
-					<table>
-						<thead><tr><th>Heroes</th><th>Strength</th></tr></thead>
-						<tbody>
-							<tr><td>1</td><td>15</td></tr>
-							<tr><td>2</td><td>30</td></tr>
-							<tr><td>3</td><td>45</td></tr>
-							<tr><td>4</td><td>60</td></tr>
-						</tbody>
-					</table>
-					<p>She starts with 2 black dice, adding same dice results together. If she drops below 7 willpower, she only rolls 1 black die.</p>
-					<p>During battle, the heroes must <strong>survive</strong> multiple rounds with the Dragon Queen. For each round of battle, the magic from the Tree of Songs weakens the Queen, draining her strength by 5.</p>
-				</div>
-				<button data-requirements="skrall && farm && witch" data-action="win = true; end = true;">The Dragon Queen is Defeated</button>
-				<button data-requirements="skrall && farm && witch" data-action="win = false; end = true;">The Heroes are Defeated</button>
-			</div>
-			
-			<div data-requirements="time_B">
-				<p class="story">A bloodied soldier reaches the heroes. &ldquo;Heroes! Please, heroes!&rdquo; he shouts. As he comes closer, he collapses to the ground in exhaustion. &ldquo;I have traveled through the night to find you,&rdquo; he gasped. &ldquo;A small contingent of Gors was spotted on one of the farms near our borders. Please help us!&rdquo; The soldier wheezed, then dies in the heroes arms.</p>
-				<div class="optional objective">
-					<p>The heroes may decide to postpone their current objective to help the family of farmers or continue on their main objective (they must decide together and cannot split up).</p>
-					<p>Place a <strong>farmer</strong> marker with a star token on space 64.</p>
-					<button data-action="farm = true; mid_farm = true" class="optional">Farm Reached by All Heroes (Optional)</button>
-				</div>
-			</div>
-			
-			<div data-requirements="farm && !skrall">
-				<p class="story">The heroes arrive at the farm to a scene of total devastation. The crops are burned and much of the farmer&rsquo;s home is in shambles. The heroes survey the scene to check for survivors. The countryside is strewn with the corpses of fallen soldiers and gor alike. &ldquo;What would have driven the Gor to come here?&rdquo; one of the heroes asks, the other doesn&rsquo;t respond but instead begins to heave his breakfast on the side of the road. A rumble is heard from the hillside behind them, they turn just in time to see a monstrous figure running toward them.</p>
-				<p>Roll a die to see what type of monster you will be facing:</p>
+			<p>Follow the standard setup instructions. Place a star token on space B and E of the legend track. Determine the locations of <strong>5 rune stones</strong> and <strong>2 medicinal herbs.</strong> Roll a die to place <strong>5 monster tiles</strong> on the legend track. If the witch token is discovered the heroes receive one free bottle of brew as usual, but are unable to purchase any more; do not place the witch figure in the space, but instead mark the space with a star token. It is assumed that she isn&rsquo;t home and the heroes just find a bottle laying about.</p>
+			<p>Place the tower piece and a <strong>skrall</strong> on space 60. Then place a <strong>Gor</strong> on spaces 59 and 58 (do not move at sunrise)</p>
+			<p>Place your heroes on space 72 with Prince Thorald.</p>
+			<p>Reveal <strong>3 random monster tiles</strong> and place them accordingly.</p>
+			<div class="legend objective">
+				<p>The heroes must defeat the Skrall general and his minions (in spaces 58, 59 and 60) before the legend marker reaches <strong>N</strong> on the legend track or the heroes fail the legend.</p>
+				<p>The Skrall General has a very good vantage point; the Skrall&rsquo;s strength is 6 for each hero.</p>
 				<table>
-					<thead><tr><th>Value</th><th>Enemy Spawned</th></tr></thead>
+					<thead><tr><th>Heroes</th><th>Strength</th></tr></thead>
 					<tbody>
-						<tr><td>1</td><td>Troll</td></tr>
-						<tr><td>2</td><td>Wardrak</td></tr>
-						<tr><td>3-4</td><td>Skrall</td></tr>
-						<tr><td>5-6</td><td>Gor</td></tr>
+						<tr><td>1</td><td>6</td></tr>
+						<tr><td>2</td><td>12</td></tr>
+						<tr><td>3</td><td>18</td></tr>
+						<tr><td>4</td><td>24</td></tr>
 					</tbody>
 				</table>
-				<p>Place the appropriate monster token on space 64, the heroes may choose not to encounter the monster right away but they <strong>must</strong> defeat the minion before continuing with the legend.</p>
-				<button data-action="mid_farm = false">Minion at the Farm is Defeated</button>
+				<p>Each hero starts with <strong>4 strength</strong> points. The party receives <strong>5 gold</strong> and each member may receive 1 item from the merchant inventory for free. The hero with the highest rank goes first.</p>
 			</div>
-				
-			<div data-requirements="!mid_farm && farm">
-				<p class="story">&ldquo;What would have possessed it to come back?&rdquo; one hero asked. &ldquo;Maybe it was looking for something?&rdquo; the other replied. The heroes search the scene and find a group of bodies dressed as guards from Reitburg Castle, littered with arrows. &ldquo;Gor don&rsquo;t use arrows&hellip;&rdquo; one hero said, plucking a shaft out of a body and eyeing it suspiciously. Among the bodies was a man with a messenger satchel; upon searching his belongings, the heroes find a letter with the royal seal, &ldquo;I guess we should take this back to the castle,&rdquo; a hero muttered.</p>
-				<p>(Place a scroll token on space 64- one of the heroes <strong>must</strong> carry this with them.)</p>
-				<p class="story">The sound of a door creaking open just down the road awakens the heroes from their thoughts and they see the farmer and his family have managed to survive the ordeal. The family thanks the heroes for their help.</p>
-				<p>(Place 1 farmer shield at the castle and continue with the main objective of the legend.)</p>
-			</div>
-					
-			<div data-requirements="farm && skrall" class="story">
-				<p>The heroes arrive at the farm to a scene of total devastation. The crops are burned and much of the farmer&rsquo;s home is in shambles. The heroes survey the scene to check for survivors. The countryside is strewn with the corpses of fallen soldiers and gor alike. &ldquo;What would have driven the Gor to come here?&rdquo; one of the heroes asks, the other doesn&rsquo;t respond but instead begins to heave his breakfast on the side of the road.</p>
-				<p>&ldquo;Maybe it was looking for something?&rdquo; the other replied. The heroes search the scene and find a group of bodies dressed as guards from Reitburg Castle, littered with arrows. &ldquo;Gor don&rsquo;t use arrows&hellip;&rdquo; one hero said, plucking a shaft out of a body and eyeing it suspiciously. Among the bodies was a man with a messenger satchel; upon searching his belongings, the heroes find a letter with the royal seal, &ldquo;I guess we should take this back to the castle?&rdquo; a hero muttered.(place a scroll token on space 64- one of the heroes <strong>must</strong> carry this with them).</p>
-				<p> Upon further investigation of the scene, the heroes find the bodies of the farmer and his  family leading to a small shed. The children bore teeth marks as if chewed to death and the wife was strewn about as if she had been brutally ravaged.</p>
-				<p>The heroes hang their heads in shame and sadness for the brutality that they have witnessed. A long moment of silence passes between them, when suddenly, the same cold wind as before rushes over the hillside and sinks into their bones. On the wind, the same familiar voice can be heard, whispering &ldquo;Darkness is alive, inside&hellip;&rdquo; The heroes shake themselves.</p>
-				<p>&ldquo;That voice...it&rsquo;s so familiar, who could it be?&rdquo; a hero wonders aloud.</p>
-				<p>A smile creeps onto the other heroes face &ldquo;Aye, let&rsquo;s see, who do we know that deals in all things creepy and magical, and is obsessed with darkness? It&rsquo;s Varkur! The Bloody Dark Mage is back!&rdquo; he shouts, and draws his weapon, ready to attack the wind.</p>
-				<p>&ldquo;No...the other hero whispers. It&rsquo;s not a threat, I think it&rsquo;s a warning. But who would warn us about dark magic&hellip;&rdquo; The hero doesn&rsquo;t finish, understanding floods through him, and without a word, he begins to run into the west.</p>
-				<p>&ldquo;Where are you going?!&rdquo; the other hero shouted.</p>
-				<p>&ldquo;Come on!&rdquo; he beckoned. &ldquo;We have to find the Witch!&rdquo;</p>
-			</div>
-			
-			<div data-requirements="time_E">
-				<div class="story">
-					<p>A fog rolls over the hillside and the heroes are set upon, once again, by a harsh wind; this time much stronger than before, knocking them to the ground. No voice was heard calling to them, but a shrill scream rang through the air and cut through them, leaving them with an icy feeling inside.</p>
-					<p>When the air finally settles, Prince Thorald pulls himself to his feet with a look of grim determination. &ldquo;I&rsquo;m sorry my friends, but I must leave you to your quest,&rdquo; he says before charging off into the distance.</p>
-				</div>
-				<p>Place Prince Thorald back in the game box.</p>
+			<div class="legend objective">
+				<p>Search the fog to find the witch.</p>
 			</div>
 
-			<!-- end states -->
-			<div data-requirements="letter === 'prince' && win === true">
-				<p class="story">The Dragon Queen lets out a terrifying scream that shakes the earth. Sounds of distress can be heard from all around as the keepers of the Tree of Songs tire from a hard-fought battle. Then, the shaking subsides and the Queen falls to her knees and reverts to her human form. A cool wind blows through the woods and light begins to filter back into the glade. On the breeze a calm, clear voice whispers, &ldquo;it is done. I am free.&rdquo; The Queen looks up and screams as the wind envelops her, whirling around her body and turning her skin to ash and dust.; the wind then rushes away through the forest to where Reka&rsquo;s body must be, giving the heroes hope that she is still alive.</p>
-				<p class="end win">The Dragon Queen is Defeated!</p>
+			<div id="log"></div>
+
+			<div id="buttons"><button data-action="time_B = true">B has been Reached</button><button data-requirements="time_B" data-action="time_E = true">E has been Reached</button><button data-requirements="!mid_farm" data-action="skrall = true">Skrall is Defeated</button><button data-requirements="!mid_farm" data-action="witch = true">Witch has been Found</button><button class="loss" data-action="win = false; end = true;">The Heroes have been Defeated</button></div>
+
+			<div id="branches">
+				<div data-requirements="skrall && farm" class="story">
+					<p>The heroes again revel in their amazing battle prowess and joy in their accomplishments. Just as they take a long sigh of relief the same cold wind as before rushes over the hillside and sinks into their bones. On the wind, the same familiar voice can be heard, whispering &ldquo;Darkness is alive, inside&hellip;&rdquo; The heroes shake themselves.</p>
+					<p>&ldquo;That voice...it&rsquo;s so familiar, who could it be?&rdquo; a hero wonders aloud.</p>
+					<p>A smile creeps onto the other heroes face &ldquo;Aye, let&rsquo;s see, who do we know that deals in all things creepy and magical, and is obsessed with darkness? It&rsquo;s Varkur! The bloody Dark Mage is back!&rdquo; he shouts, and draws his weapon, ready to attack the wind.</p>
+					<p>&ldquo;No&hellip;&rdquo;the other hero whispers. &ldquo;It&rsquo;s not a threat I think it&rsquo;s a warning. But who would warn us about dark magic?&rdquo; The hero doesn&rsquo;t finish, understanding floods through him, and without a word, he begins to run toward the west.</p>
+					<p>&ldquo;Where are you going?!&rdquo; the other hero shouts.</p>
+					<p>&ldquo;Come on!&rdquo; he beckons. &ldquo;We have to find the Witch!&rdquo;</p>
+				</div>
+				<div data-requirements="skrall && !farm" class="story">
+					<p>The heroes again revel in their amazing battle prowess and joy in their accomplishments. Just as they are climbing down from the tower, a soldier appears and tells them that he has been to the farm and found the farmer and his family dead.</p>
+				</div>
+				
+				<div data-requirements="witch">
+					<div class="story">
+						<p>When the heroes reach the witches home, they find it in shambles. They make their way through the small cottage and find furniture overturned and countless bodies of soldiers again bearing the sigil of Reitburg Castle guards.</p>
+						<p>&ldquo;There was a fight here,&rdquo; one hero said. &ldquo;But what are the guards doing so far from the castle?&rdquo;</p>
+						<p>They followed the signs of struggle to the surrounding woods, scorch marks tore into the trees and bodies littered the ground; the smell of burnt wood and flesh hung thickly in the air. The battle seemed to have culminated at a ring of charred earth and timber that formed a circle; five strides wide, around a single body. As they moved closer they recognize it as the prince.</p>
+						<p>Moving him onto his back, the heroes discover that he is still breathing. He opens his eyes slowly, and looks up at them.</p>
+						<p>&ldquo;...too late,&rdquo; he muttered. &ldquo;...too late,&rdquo; the prince moans again before falling unconscious.</p>
+						<p>&ldquo;First the wind speaks, then the Gor organize themselves, Castle guards are killed by other soldiers in the borderlands, now this?!&rdquo; a hero exclaims.</p>
+						<p>&ldquo;Yes,&rdquo; says another, &ldquo;something is definitely amiss in the castle.&rdquo; The hero pulls out the letter they had been carrying. &ldquo;I think it might be time to read this.&rdquo;</p>
+						<p>&ldquo;Are you mad?!&rdquo; replies the other. &ldquo;Only royalty can break a royal seal?! Or it&rsquo;s treason!&rdquo;</p>
+						<p>&ldquo;I guess we have to find a royal, then&hellip;&rdquo;</p>
+					</div>
+					<p>Place the Prince Thorald marker on its side in the location of the Witch fog token. While the prince is wounded, the heroes do not receive a bonus to their attack.</p>
+					<p>The heroes must decide if they want to:</p>
+					<ul>
+						<li>
+							Take the letter and wounded prince to the queen. All heroes and the prince must venture to the Reitburg Castle (space 0). The prince can only move 2 spaces at a time instead of 4 as he is wounded, and he does not give any bonus while in combat.
+						</li>
+						<li>
+							Or wait here for an entire day for the prince to recover and read the letter.
+						</li>
+					</ul>
+					
+					<button data-requirements="!letter" data-action="letter = 'castle'">All Heroes are in the Castle</button>
+					<button data-requirements="!letter" data-action="letter = 'prince'">Wait for the Prince</button>
+				</div>
+				
+				<div data-requirements="letter == 'castle'">
+					<div class="story">
+						<p>The heroes are greeted as they enter the castle grounds and are escorted to the Queen. Upon entering the ornately decorated throne room, the Queen is shocked to see the prince is alive and gives orders for him to be taken to his chambers and heavily guarded.</p>
+						<p>The heroes give her the letter they found.(Remove scroll from inventory and return it to the game box)</p>
+						<p>The Queen opens the letter and sighs audibly. The heroes look at each other in confusion. &ldquo;What&rsquo;s wrong, your majesty?&rdquo; one hero asks.</p>
+						<p>&ldquo;It appears that our plea for help didn&rsquo;t make it,&rdquo; she says.</p>
+						<p>&ldquo;A plea for help? To whom? Is this about the voice we&rsquo;ve been hearing?&rdquo; they ask.</p>
+						<p>&ldquo;It is, but I doubt you will hear it any longer. It appears that the prince has been in league with the Dark Mage Varkur, as his apprentice. He has been using his new powers to alter the mind of the witch Reka to doing his bidding.&rdquo;</p>
+						<p>The heroes gasp in surprise. &ldquo;But her warning?&rdquo;</p>
+						<p>&ldquo;Yes, Reka is very strong&rdquo; the Queen continued, &ldquo;She was able to fight against the prince&rsquo;s powers to try and warn you about him.&rdquo;</p>
+						<p>&ldquo;Darkness is alive, inside&hellip;&rdquo; a hero whispers. &ldquo;She meant inside the castle?&rdquo;</p>
+						<p>The Queen nodded. &ldquo;I&rsquo;m afraid so. We were writing to the keepers of the Tree of Songs to see if they could use their healing magic to help her, but the prince&rsquo;s spies must have found our messenger.&rdquo;</p>
+						<p>The doors to the throne room burst open and a frantic soldier runs up to the queen, falling to his knees. &ldquo;Your majesty! The prince has died from his wounds and the witch is gone!&rdquo;</p>
+						<p>The building rumbles as a scream rings through the castle and echoes off the stone walls.</p>
+						<p>A hero drew his weapon, &ldquo;You have the witch here?!&rdquo; he shouted.</p>
+						<p>&ldquo;Yes,&rdquo; the Queen exclaimed worriedly, &ldquo;I heard her warning, too and sent a regiment of my personal guards to escort her here so she wouldn&rsquo;t have to hide in the woods any longer. They told me that the prince fought them but was eventually killed, so they brought her here until she was well again.&rdquo;</p>
+						<p>Screams shook the building so violently that the glass windows behind the throne shattered.</p>
+						<p>&ldquo;But if he is dead, then why is Reka doing this?!&rdquo; A hero exclaimed.</p>
+						<p>A bolt of lightning shot through the broken windows and into the throne room, sending the heroes and the Queen flying in all directions. As the heroes looked to the center of the room, where the bolt had hit, they saw the witch, she was bathed in purple shadow; her eyes glowing with a fiendish blue hue. &ldquo;Because,&rdquo; she shouted &ldquo;I, Thorald, have taken over the witch&rsquo;s mind completely, and now, the kingdom will be mine!&rdquo;</p>
+					</div>
+					<p>Place the witch figure in the castle (space 0).</p>
+					<div class="legend objective">
+						<p>Defeat the Mad Prince before the legend marker reaches the N tile on the legend track. If the Mad Prince is defeated, immediately move the legend marker to the N tile.</p>
+						<p>The Mad Prince has 9 strength for each hero in play:</p>
+						<table>
+							<thead><tr><th>Heroes</th><th>Willpower</th></tr></thead>
+							<tbody>
+								<tr><td>1</td><td>9</td></tr>
+								<tr><td>2</td><td>18</td></tr>
+								<tr><td>3</td><td>27</td></tr>
+								<tr><td>4</td><td>36</td></tr>
+							</tbody>
+						</table>
+						<p>He starts with 2 black dice, adding same dice results together. If he drops below 7 willpower, he only rolls 1 black die.</p>
+						<p>During battle the Prince steadily grows in power. For each round of battle after the first, the prince&rsquo;s <strong>strength</strong> grows by 5.</p>
+						<button data-requirements="skrall && farm && witch" data-action="win = true; end = true;">Mad Prince has been Defeated</button> <button data-action="win = false; end = true;">Heroes were Defeated</button>
+					</div>
+				</div>
+
+				<div data-requirements="letter === 'prince'">
+					<p>A day passes. Immediately perform all of the tasks in the Sunrise Box (leaving the heroes time markers where they are).</p>
+					<div class="story">
+						<p>After a night of fevered dreams and a full day of care, the prince finally awakens, rested and fully recovered. &ldquo;What...what happened?&rdquo; he asks.</p>
+						<p>&ldquo;That&rsquo;s what we would like to know,&rdquo; replies one of the heroes, handing the prince the letter they found at the farm.
+					</div>
+					<p>Prince Thorald, being healed, now stands up and moves normally. Remove the scroll from your inventory and return it to the game box.</p>
+					<div class="story">
+						<p>The prince opens the letter and reads it with a sorrowful expression. &ldquo;It&rsquo;s as we feared, then,&rdquo;</p>
+						<p>the prince says.</p>
+						<p>&ldquo;What&rsquo;s wrong?&rdquo; a hero asks. &ldquo;Is is about the voice that we&rsquo;ve been hearing?&rdquo;</p>
+						<p>&ldquo;It is,&rdquo; the prince replies, sighing heavily &ldquo;though I doubt you will hear it any longer. It appears that the Queen has been in league with the Dark Mage Varkur, for a long time and has been using her new powers to alter the mind of the witch Reka to do his bidding.&rdquo;</p>
+						<p>The heroes gasp in surprise. &ldquo;But her warning?&rdquo;</p>
+						<p>&ldquo;Yes, Reka is very strong&rdquo; the prince continued, &ldquo;She was able to fight against the Queen&rsquo;s powers to try and warn you about her.&rdquo;</p>
+						<p>&ldquo;Darkness is alive, inside&hellip;&rdquo; a hero whispered. &ldquo;She meant inside the castle?&rdquo;</p>
+						<p>The Prince nodded. &ldquo;I&rsquo;m afraid so. When I heard her scream I knew that they had found her in the woods, where she was hiding, so I came as fast as I could to try and help her. But the Queen was already here with a host of men loyal to her. There were too many, and...and I was too late.&rdquo;</p>
+						<p>&ldquo;Too late,&rdquo; a hero asked, &ldquo;you mean, the witch she&rsquo;s&hellip;&rdquo;</p>
+						<p>The prince shook his head, &ldquo;Not dead, but as good as... The Queen decided that since she couldn&rsquo;t control her, she would absorb her power. The surge from the spell caused a massive explosion and I was knocked out. I don&rsquo;t know if anyone else survived.&rdquo;</p>
+						<p>&ldquo;Well,&rdquo; one hero said happily &ldquo;maybe the Queen died too, problem solved.&rdquo;</p>
+						<p>A long shriek was heard in the distance.</p>
+						<p>&ldquo;Somehow, I doubt it,&rdquo; the prince muttered.</p>
+						<p>The sound grew closer, and echoed through the valley. It was a roar that bellowed deep into the earth followed by a shrill tone that shook your very mind.</p>
+						<p>It was a sound that was all too familiar to the heroes.</p>
+						<p>&ldquo;It can&rsquo;t be&hellip;&rdquo; a hero whispered. &ldquo;She couldn&rsquo;t, could she?! It&rsquo;s impossible!&rdquo;</p>
+						<p>A dark figure flew over them and toward the eastern edge of the forest.</p>
+						<p>&ldquo;She&rsquo;s turned herself into a dragon?!&rdquo; a hero shouted.</p>
+						<p>&ldquo;Yes!&rdquo; yelled the prince, &ldquo; and she is heading for the Tree of Songs, with Reka gone, it&rsquo;s the only place left in the kingdom with enough magic to stop her, hurry! There is not a moment to waste!&rdquo;</p>
+					</div>
+					<p>Place the Dragon and Prince Thorald at the Tree of Songs (space 57), the Dragon does not move at sunrise.</p>
+					<div class="legend objective">
+						<p>Defeat the Dragon Queen before the legend marker reaches the N tile on the legend track.</p>
+						<p>The Dragon Queen has 15 strength for each hero in play.</p>
+						<table>
+							<thead><tr><th>Heroes</th><th>Strength</th></tr></thead>
+							<tbody>
+								<tr><td>1</td><td>15</td></tr>
+								<tr><td>2</td><td>30</td></tr>
+								<tr><td>3</td><td>45</td></tr>
+								<tr><td>4</td><td>60</td></tr>
+							</tbody>
+						</table>
+						<p>She starts with 2 black dice, adding same dice results together. If she drops below 7 willpower, she only rolls 1 black die.</p>
+						<p>During battle, the heroes must <strong>survive</strong> multiple rounds with the Dragon Queen. For each round of battle, the magic from the Tree of Songs weakens the Queen, draining her strength by 5.</p>
+					</div>
+					<button data-requirements="skrall && farm && witch" data-action="win = true; end = true;">The Dragon Queen is Defeated</button>
+					<button data-requirements="skrall && farm && witch" data-action="win = false; end = true;">The Heroes are Defeated</button>
+				</div>
+				
+				<div data-requirements="time_B">
+					<p class="story">A bloodied soldier reaches the heroes. &ldquo;Heroes! Please, heroes!&rdquo; he shouts. As he comes closer, he collapses to the ground in exhaustion. &ldquo;I have traveled through the night to find you,&rdquo; he gasped. &ldquo;A small contingent of Gors was spotted on one of the farms near our borders. Please help us!&rdquo; The soldier wheezed, then dies in the heroes arms.</p>
+					<div class="optional objective">
+						<p>The heroes may decide to postpone their current objective to help the family of farmers or continue on their main objective (they must decide together and cannot split up).</p>
+						<p>Place a <strong>farmer</strong> marker with a star token on space 64.</p>
+						<button data-action="farm = true; mid_farm = true" class="optional">Farm Reached by All Heroes (Optional)</button>
+					</div>
+				</div>
+				
+				<div data-requirements="farm && !skrall">
+					<p class="story">The heroes arrive at the farm to a scene of total devastation. The crops are burned and much of the farmer&rsquo;s home is in shambles. The heroes survey the scene to check for survivors. The countryside is strewn with the corpses of fallen soldiers and gor alike. &ldquo;What would have driven the Gor to come here?&rdquo; one of the heroes asks, the other doesn&rsquo;t respond but instead begins to heave his breakfast on the side of the road. A rumble is heard from the hillside behind them, they turn just in time to see a monstrous figure running toward them.</p>
+					<p>Roll a die to see what type of monster you will be facing:</p>
+					<table>
+						<thead><tr><th>Value</th><th>Enemy Spawned</th></tr></thead>
+						<tbody>
+							<tr><td>1</td><td>Troll</td></tr>
+							<tr><td>2</td><td>Wardrak</td></tr>
+							<tr><td>3-4</td><td>Skrall</td></tr>
+							<tr><td>5-6</td><td>Gor</td></tr>
+						</tbody>
+					</table>
+					<p>Place the appropriate monster token on space 64, the heroes may choose not to encounter the monster right away but they <strong>must</strong> defeat the minion before continuing with the legend.</p>
+					<button data-action="mid_farm = false">Minion at the Farm is Defeated</button>
+				</div>
+					
+				<div data-requirements="!mid_farm && farm">
+					<p class="story">&ldquo;What would have possessed it to come back?&rdquo; one hero asked. &ldquo;Maybe it was looking for something?&rdquo; the other replied. The heroes search the scene and find a group of bodies dressed as guards from Reitburg Castle, littered with arrows. &ldquo;Gor don&rsquo;t use arrows&hellip;&rdquo; one hero said, plucking a shaft out of a body and eyeing it suspiciously. Among the bodies was a man with a messenger satchel; upon searching his belongings, the heroes find a letter with the royal seal, &ldquo;I guess we should take this back to the castle,&rdquo; a hero muttered.</p>
+					<p>(Place a scroll token on space 64- one of the heroes <strong>must</strong> carry this with them.)</p>
+					<p class="story">The sound of a door creaking open just down the road awakens the heroes from their thoughts and they see the farmer and his family have managed to survive the ordeal. The family thanks the heroes for their help.</p>
+					<p>(Place 1 farmer shield at the castle and continue with the main objective of the legend.)</p>
+				</div>
+						
+				<div data-requirements="farm && skrall">
+					<div class="story">
+						<p>The heroes arrive at the farm to a scene of total devastation. The crops are burned and much of the farmer&rsquo;s home is in shambles. The heroes survey the scene to check for survivors. The countryside is strewn with the corpses of fallen soldiers and gor alike. &ldquo;What would have driven the Gor to come here?&rdquo; one of the heroes asks, the other doesn&rsquo;t respond but instead begins to heave his breakfast on the side of the road.</p>
+						<p>&ldquo;Maybe it was looking for something?&rdquo; the other replied. The heroes search the scene and find a group of bodies dressed as guards from Reitburg Castle, littered with arrows. &ldquo;Gor don&rsquo;t use arrows&hellip;&rdquo; one hero said, plucking a shaft out of a body and eyeing it suspiciously. Among the bodies was a man with a messenger satchel; upon searching his belongings, the heroes find a letter with the royal seal, &ldquo;I guess we should take this back to the castle?&rdquo; a hero muttered.</p>
+					</div>
+					<p>Place a scroll token on space 64- one of the heroes <strong>must</strong> carry this with them.</p>
+					<div class="story">
+						<p>Upon further investigation of the scene, the heroes find the bodies of the farmer and his family leading to a small shed. The children bore teeth marks as if chewed to death and the wife was strewn about as if she had been brutally ravaged.</p>
+						<p>The heroes hang their heads in shame and sadness for the brutality that they have witnessed. A long moment of silence passes between them, when suddenly, the same cold wind as before rushes over the hillside and sinks into their bones. On the wind, the same familiar voice can be heard, whispering &ldquo;Darkness is alive, inside&hellip;&rdquo; The heroes shake themselves.</p>
+						<p>&ldquo;That voice...it&rsquo;s so familiar, who could it be?&rdquo; a hero wonders aloud.</p>
+						<p>A smile creeps onto the other heroes face &ldquo;Aye, let&rsquo;s see, who do we know that deals in all things creepy and magical, and is obsessed with darkness? It&rsquo;s Varkur! The Bloody Dark Mage is back!&rdquo; he shouts, and draws his weapon, ready to attack the wind.</p>
+						<p>&ldquo;No...the other hero whispers. It&rsquo;s not a threat, I think it&rsquo;s a warning. But who would warn us about dark magic&hellip;&rdquo; The hero doesn&rsquo;t finish, understanding floods through him, and without a word, he begins to run into the west.</p>
+						<p>&ldquo;Where are you going?!&rdquo; the other hero shouted.</p>
+						<p>&ldquo;Come on!&rdquo; he beckoned. &ldquo;We have to find the Witch!&rdquo;</p>
+					</div>
+				</div>
+				
+				<div data-requirements="time_E">
+					<div class="story">
+						<p>A fog rolls over the hillside and the heroes are set upon, once again, by a harsh wind; this time much stronger than before, knocking them to the ground. No voice was heard calling to them, but a shrill scream rang through the air and cut through them, leaving them with an icy feeling inside.</p>
+						<p>When the air finally settles, Prince Thorald pulls himself to his feet with a look of grim determination. &ldquo;I&rsquo;m sorry my friends, but I must leave you to your quest,&rdquo; he says before charging off into the distance.</p>
+					</div>
+					<p>Place Prince Thorald back in the game box.</p>
+				</div>
+
+				<!-- end states -->
+				<div data-requirements="letter === 'prince' && win === true">
+					<p class="story">The Dragon Queen lets out a terrifying scream that shakes the earth. Sounds of distress can be heard from all around as the keepers of the Tree of Songs tire from a hard-fought battle. Then, the shaking subsides and the Queen falls to her knees and reverts to her human form. A cool wind blows through the woods and light begins to filter back into the glade. On the breeze a calm, clear voice whispers, &ldquo;it is done. I am free.&rdquo; The Queen looks up and screams as the wind envelops her, whirling around her body and turning her skin to ash and dust.; the wind then rushes away through the forest to where Reka&rsquo;s body must be, giving the heroes hope that she is still alive.</p>
+					<p class="end-message-message win">The Dragon Queen is Defeated!</p>
+				</div>
+				<div data-requirements="letter === 'castle' && win === true">
+					<p class="story">The Mad Prince lets out a terrifying scream that shakes the foundations of the castle. Sounds of distress can be heard from outside as confused soldiers and peasants run for their lives to avoid falling rubble. Then, the shaking subsides and the prince falls to his knees. A cool wind blows through the window and light begins to filter back into the room. On the breeze the heroes hear a calm voice whisper, &ldquo;it is done. I am free.&rdquo; The price looks up with tear-strewn eyes into the direction of the wind. &ldquo;I am...sorry,&rdquo; he whispers between ragged breaths and sobs. The wind surrounds him in an embrace and he smiles as it whirls around him, turning his skin into ash and dust; the wind then rushes back into Reka&rsquo;s body, giving the heroes hope that she may still be alive.</p>
+					<p class="end-message win">The Heroes have Won!</p>
+				</div>
+				
+				<div data-requirements="letter === 'prince' && win === false">
+					<p class="story">The Dragon Queen&rsquo;s laugh echoes through the forest and beyond as she takes flight and soars through the kingdom, laying waste to all that dare oppose her.</p>
+					<p class="end-message loss">The Heroes were Defeated!</p>
+				</div>
+				<div data-requirements="letter === 'castle' && win === false">
+					<p class="story">The Mad Princes laugh echoes through the castle and beyond. &ldquo;It is mine! It is ALL mine!&rdquo;</p>
+					<p class="end-message loss">The Heroes have Fallen!</p>
+				</div>
+				<div data-requirements="end && !letter">
+					<p class="story">The mystery unsolved, the kingdom in Peril, the Heroes lie slain in the field.</p>
+					<p class="end-message loss">The Heroes have Fallen!</p>
+				</div>
 			</div>
-			<div data-requirements="letter === 'castle' && win === true">
-				<p class="story">The Mad Prince lets out a terrifying scream that shakes the foundations of the castle. Sounds of distress can be heard from outside as confused soldiers and peasants run for their lives to avoid falling rubble. Then, the shaking subsides and the prince falls to his knees. A cool wind blows through the window and light begins to filter back into the room. On the breeze the heroes hear a calm voice whisper, &ldquo;it is done. I am free.&rdquo; The price looks up with tear-strewn eyes into the direction of the wind. &ldquo;I am...sorry,&rdquo; he whispers between ragged breaths and sobs. The wind surrounds him in an embrace and he smiles as it whirls around him, turning his skin into ash and dust; the wind then rushes back into Reka&rsquo;s body, giving the heroes hope that she may still be alive.</p>
-				<p class="end win">The Heroes have Won!</p>
-			</div>
-			
-			<div data-requirements="letter === 'prince' && win === false">
-				<p class="story">The Dragon Queen&rsquo;s laugh echoes through the forest and beyond as she takes flight and soars through the kingdom, laying waste to all that dare oppose her.</p>
-				<p class="end loss">The Heroes were Defeated!</p>
-			</div>
-			<div data-requirements="letter === 'castle' && win === false">
-				<p class="story">The Mad Princes laugh echoes through the castle and beyond. &ldquo;It is mine! It is ALL mine!&rdquo;</p>
-				<p class="end loss">The Heroes have Fallen!</p>
-			</div>
-			<div data-requirements="end && !letter">
-				<p class="end loss">The Heroes have Fallen!</p>
-			</div>
-		</div>
+		</main>
+		<script src="script.js" type="text/javascript"></script>
 	</body>
 </html>

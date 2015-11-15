@@ -1,22 +1,34 @@
-body {font-family:sans-serif; padding:1em;}
+body {font:140% sans-serif;}
 
-header {}
-	header h1 {display:inline;}
+main {display:block; max-width:40em; margin:0 auto; padding:1%;}
+
+a {color:blue;}
+a.disabled {opacity:0.5; cursor:default;}
+
+h1 {font-size:200%;}
+h2 {font-size:140%; padding-left:0.2em;}
+
+header {display:block;}
+header h1, header h2, header nav {display:inline-block; margin:0;}
 
 #buttons {text-align:right;}
 	#buttons.end {display:none;}
 	
-button {display:inline; margin:0.1em;}
-button[data-used] {display:none;}
+button {
+	display:inline; margin:0.1em; padding:0.2em 0.4em; font:inherit; cursor:pointer;
+	border-radius:0.2em; border:0.2em solid #ddd; background-color:#eee;
+}
+button[disabled] {display:none;}
 
-#branches {display:none;}
+body.js #branches {display:none;}
 
 .story {font-family:serif; padding:0 5%;}
-button[disabled] {display:none;}
 
 table {margin:0 auto; border-collapse:collapse;}
 table td, table th {border:1px solid; padding:0.2em 0.4em; text-align:center;}
 
-p.end {padding-top:1em; margin:1em 0 0 0; border-top:0.2em solid; font-size:140%;}
-p.win {border-color:green;}
-p.loss {border-color:red;}
+.end-message {padding-top:1em; margin:1em 0 0 0; border-top:0.2em solid; font-size:140%;}
+
+.win {border-color:green;}
+.loss {border-color:red;}
+

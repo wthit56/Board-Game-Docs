@@ -1,6 +1,5 @@
 host.bat
-x-*
-script-2.js
+old-versions
 
 # Windows image file caches
 Thumbs.db
