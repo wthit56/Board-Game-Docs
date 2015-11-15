@@ -1,82 +1,116 @@
-function on(dom, event, listener) {
-	return dom.addEventListener(event, listener);
-}
-on.remove = function(dom, event, listener) {
-	dom.removeEventListener(event, listener);
-};
-
-if (typeof setImmediate === "undefined") {
-	setImmediate = function(callback) {
-		return setTimeout(callback, 0);
-	};
-}
-
-function scrollTo(dom) {
-	if (dom.scrollIntoViewIfNeeded) { dom.scrollIntoViewIfNeeded(); }
-	else if (dom.scrollIntoView) { dom.scrollIntoView(); }
-	else { window.scrollTo(window.scrollLeft, dom.offsetTop); }
-}
-
-var state;
+var state, forEach = Array.prototype.forEach, slice = Array.prototype.slice, map = Array.prototype.map;
 on(window, "load", function() {
-	var i, l;
+	var name = "bgd-loa-asw";
+	on(document.getElementById("reset"), "click", function() {
+		document.cookie = name+"-state=;expires=0";
+		document.cookie = name+"-buttons=;expires=0";
+		window.location.reload();
+	});
 	
 	state = (function() {
-		var state = {
-			win: null, time_B: false, time_E: false,
-			mid_farm: false, letter: null,
-			farm: false, queen: false, skrall: false, witch: false
-		};
+		var c = document.cookie.match(new RegExp(name+"-state=([^;]+)"));
+		if (c) {
+			state = JSON.parse(c[1]);
+		}
+		else {
+			state = {
+				end: false, buttons: [],
+				win: null, time_B: false, time_E: false,
+				mid_farm: false, letter: null,
+				farm: false, queen: false, skrall: false, witch: false
+			};
+		}
+		
 		state.save = function() {
+			var d = new Date();
+			d.setFullYear(d.getFullYear() + 1);
+			
+			state.buttons = map.call(buttons.children, function(button) {
+				return { disabled: button.disabled, used: button.used };
+			});
+			document.cookie = name + "-state=" + JSON.stringify(state) + ";expires=" + d;
+			
 			saving = false;
 		};
 		
 		var saving = false;
 		state.run = function(src, _return) {
-			var result = Function("state", "with(state){"+(_return?"return ":"") + src + ";}")(state);
-			if (!saving) {
+			var result = Function("state", "with (state) {" + (_return ? "return " : "") + src + ";}")(state);
+			if (!_return && !saving) {
 				saving = true;
 				setImmediate(state.save);
 			}
+			
 			return result;
 		};
 		
 		return state;
 	})();
 	
-	var branches = document.querySelectorAll("[data-requirements]");
-	branches.update = function() {
-		var needsUpdate = false;
-		for (i = 0, l = branches.length; i < l; i++) {
-			if (!branches[i].dataset.used) {
-				var passed = state.run(branches[i].dataset.requirements, true);
-				if (branches[i].tagName === "BUTTON") {
-					branches[i].disabled = !passed;
-				}
-				else if (passed) {
-					branches[i].dataset.used = true;
-					branches[i].classList.add("shown");
-					if (branches[i].dataset.action) {
-						state.run(branches[i].dataset.action);
-						needsUpdate = true;
-					}
-					scrollTo(branches[i]);
-				}
-			}
-		}
-		
-		if (needsUpdate) { return branches.update(); }
-	};
-	branches.update();
+	var log = document.getElementById("log"), buttons = document.getElementById("buttons");
 	
-	Array.prototype.forEach.call(document.querySelectorAll("button"), function(button) {
-		on(button, "click", function button_click() {
-			state.run(button.dataset.action);
-			button.disabled = true;
-			button.dataset.used = true;
-			on.remove(button, "click", button_click);
-			console.log("click", button);
-			branches.update();
+	var branches = document.getElementById("branches");
+	function update() {
+		forEach.call(branches.children, function(branch) {
+			if (state.run(branch.dataset.requirements, true)) {
+				log.appendChild(branch);
+				var _buttons = branch.getElementsByTagName("BUTTON");
+				console.log(branch, _buttons.length, _buttons);
+				forEach.call(slice.call(_buttons), function(button) {
+					console.log("move button", button);
+					//buttons.appendChild(document.createTextNode(" "));
+					buttons.insertBefore(button, buttons.lastElementChild);
+				});
+			}
 		});
+		forEach.call(buttons.children, function(button) {
+			//console.log(button, !button.dataset.requirements, state.run(button.dataset.requirements, true), !button.classList.contains("shown"));
+			if (button.used) { return; }
+			
+			if (!button.dataset.requirements || state.run(button.dataset.requirements, true)) { buttonShow(button); }
+			else { buttonHide(button); }
+		});
+		
+		if (state.end) {
+			buttons.classList.add("end");
+		}
+	}
+	console.log(state);
+	update();
+	
+	state.buttons.forEach(function(state, i) {
+		var button = buttons.children[i];
+		if (state.disabled) { buttonHide(button); }
+		else { buttonShow(button); }
+		
+		button.used = state.used;
 	});
+	
+	function buttonShow(button) {
+		if (!button.initialised || button.disabled) {
+			on(button, "click", buttonClick);
+			button.disabled = false;
+			button.initialised = true;
+		}
+	}
+	function buttonHide(button) {
+		if (!button.disabled) {
+			on.remove(button, "click", buttonClick);
+			button.disabled = true;
+		}
+	}
+	
+	function buttonClick() {
+		console.log("clicked", this);
+		state.run(this.dataset.action);
+		this.disabled = true; this.used = true;
+		update();
+	}
 });
+
+
+
+
+
+
+

@@ -1,3 +1,7 @@
+host.bat
+x-*
+script-2.js
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
