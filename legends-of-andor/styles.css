@@ -12,7 +12,7 @@ header {display:block;}
 header h1, header h2, header nav {display:inline-block; margin:0;}
 
 #buttons {text-align:right;}
-	#buttons.end {display:none;}
+	#buttons.hidden {display:none;}
 	
 button {
 	display:inline; margin:0.1em; padding:0.2em 0.4em; font:inherit; cursor:pointer;

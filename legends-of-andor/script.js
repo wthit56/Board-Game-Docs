@@ -1,117 +1,137 @@
 document.body.classList.add("js");
 
-var state, forEach = Array.prototype.forEach, slice = Array.prototype.slice, map = Array.prototype.map;
+var forEach = Array.prototype.forEach, filter = Array.prototype.filter, slice = Array.prototype.slice, map = Array.prototype.map;
 on(window, "load", function() {
-	var name = "bgd-loa-asw";
-	on(document.getElementById("reset"), "click", function() {
-		document.cookie = name+"-state=;expires=0";
-		document.cookie = name+"-buttons=;expires=0";
-		window.location.reload();
+	var log = document.getElementById("log"), buttons = document.getElementById("buttons"), branches = document.getElementById("branches");
+	
+	branches.byIndex = { length: branches.children };
+	forEach.call(branches.children, function(branch, index) {
+		branches.byIndex[branch.index = index] = branch;
 	});
 	
-	state = (function() {
-		var c = document.cookie.match(new RegExp(name+"-state=([^;]+)"));
-		if (c) {
-			state = JSON.parse(c[1]);
-		}
-		else {
-			state = {
-				end: false, buttons: [],
-				win: null, time_B: false, time_E: false,
-				mid_farm: false, letter: null,
-				farm: false, queen: false, skrall: false, witch: false
-			};
-		}
-		
-		state.save = function() {
-			var d = new Date();
-			d.setFullYear(d.getFullYear() + 1);
-			
-			state.buttons = map.call(buttons.children, function(button) {
-				return { disabled: button.disabled, used: button.used };
-			});
-			document.cookie = name + "-state=" + JSON.stringify(state) + ";expires=" + d;
-			
-			saving = false;
-		};
-		
-		var saving = false;
-		state.run = function(src, _return) {
-			var result = Function("state", "with (state) {" + (_return ? "return " : "") + src + ";}")(state);
-			if (!_return && !saving) {
-				saving = true;
-				setImmediate(state.save);
+	var cookiePath = window.location.pathname.match(/[\W\w]*\//)[0];
+	
+	function cookieExpires() {
+		var expires = new Date();
+		expires.setFullYear(expires.getFullYear());
+		return expires;
+	}
+	
+	(function loadCookie() {
+		if (state && state.name) {
+			var cookie = document.cookie;
+			var relevant = cookie.match(new RegExp(state.name + "=([^;]+)"));
+			if (relevant && relevant[1]) {
+				var loadedState = decodeComponentURI(JSON.parse(relevant[1]));
+				if (
+					((loadedState.version | 0) === (state.version | 0)) ||
+					/* different version && */ confirm("This Legend has singificantly changed since you were last here.\nDo you want to continue loading? (This may cause errors.)")
+				) {
+					document.cookie = state.name + "=" + relevant[1] + ";path=" + cookiePath + ";expires=" + cookieExpires();
+					
+					state = loadedState;
+					if (state.render.end) { buttons.classList.add("hidden"); }
+					else {
+						forEach.call(buttons.children, function(button) {
+							setupButton(button);
+						});
+
+						Array.prototype.forEach.call(state.render.branches, function(index) {
+							addBranch(branches.byIndex[index]);
+						});
+						
+						state.branches.length = state.render.buttons.length = 0;
+					}
+				}
+				else {
+					alert("Progress has been reset.");
+				}
 			}
-			
-			return result;
-		};
-		
-		return state;
+		}
 	})();
 	
-	var log = document.getElementById("log"), buttons = document.getElementById("buttons");
-	
-	var branches = document.getElementById("branches");
-	function update() {
-		forEach.call(branches.children, function(branch) {
-			if (state.run(branch.dataset.requirements, true)) {
-				log.appendChild(branch);
-				var _buttons = branch.getElementsByTagName("BUTTON");
-				console.log(branch, _buttons.length, _buttons);
-				forEach.call(slice.call(_buttons), function(button) {
-					console.log("move button", button);
-					//buttons.appendChild(document.createTextNode(" "));
-					buttons.insertBefore(button, buttons.lastElementChild);
-				});
+	(function setupState() {
+		if (!state.render) {
+			state.render = { end: false, branches: [], buttons: [] };
+		}
+		
+		var toSave = false;
+		state.run = function(src) {
+			var f = Function("with (state) { " + src + "}");
+			//console.log(f);
+			return f(state);
+		};
+		state.update = function(src) {
+			state.run(src);
+			if (!toSave) { setImmediate(state.save); toSave = true; }
+		};
+		state.test = function(src) {
+			return state.run("return (" + src + ")");
+		};
+		
+		state.save = function() {
+			if (state && state.name && toSave) {
+				document.cookie = state.name + "=" + encodeComponentURI(JSON.stringify(state)) + ";path=" + cookiePath + ";expires=" + cookieExpires();
 			}
-		});
-		forEach.call(buttons.children, function(button) {
-			//console.log(button, !button.dataset.requirements, state.run(button.dataset.requirements, true), !button.classList.contains("shown"));
-			if (button.used) { return; }
+			toSave = false;
+		};
+		state.clear = function() {
+			if (state && state.name) {
+				document.cookie = state.name + "=;path=" + cookiePath + ";expires=" + new Date(0);
+			}
+		};
+	})();
+
+	function addBranch(branch) {
+		if (log.children.length <= state.render.branches) {
+			state.render.branches.push(branch.index);
+		}
 			
-			if (!button.dataset.requirements || state.run(button.dataset.requirements, true)) { buttonShow(button); }
-			else { buttonHide(button); }
-		});
+		var branchButtons = branch.getElementsByTagName("BUTTON");
+		forEach.call(branchButtons, addButton);
 		
-		if (state.end) {
-			buttons.classList.add("end");
+		log.appendChild(branch);
+	}
+	function branchIsRequired(branch) {
+		return (branch.dataset.requirements && state.test(branch.dataset.requirements));
+	}
+	
+	function addButton(button) {
+		if (!state.render.end) {
+			setupButton(button, buttons.children.length);
+			buttons.appendChild(button);
 		}
 	}
-	console.log(state);
-	update();
-	
-	state.buttons.forEach(function(state, i) {
-		var button = buttons.children[i];
-		if (state.disabled) { buttonHide(button); }
-		else { buttonShow(button); }
+	function setupButton(button, index) {
+		if (!state.render.end) {
+			if (state.buttons.length > index) {
+				button.used = (state.buttons[index] === "1");
+			}
+			applyRequirementsButton(button);
+		}
+	}
+	function applyRequirementsButton(button) {
+		var isDisabled = (
+			!button.used &&
+			(
+				button.dataset.requirements
+					? !state.test(button.dataset.requirements)
+					: true
+			)
+		);
 		
-		button.used = state.used;
-	});
-	
-	function buttonShow(button) {
-		if (!button.initialised || button.disabled) {
-			on(button, "click", buttonClick);
-			button.disabled = false;
-			button.initialised = true;
+		if (button.disabled !== isDisabled) {
+			button.disabled = isDisabled;
+			(isDisabled ? on.remove : on)(button, "click", buttonClick);
 		}
 	}
-	function buttonHide(button) {
-		if (!button.disabled) {
-			on.remove(button, "click", buttonClick);
-			button.disabled = true;
-		}
-	}
-	
 	function buttonClick() {
-		console.log("clicked", this);
-		state.run(this.dataset.action);
-		this.disabled = true; this.used = true;
-		update();
+		state.update(this.dataset.action);
+		filter.call(branches.children, branchIsRequired).forEach(branchAddIfRequired);
+		this.used = true;
+		this.disabled = true;
 	}
 });
-
-
-
 
 
 

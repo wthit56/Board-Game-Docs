@@ -6,6 +6,14 @@
 		<script src="utils.js" type="text/javascript"></script>
 	</head>
 	<body>
+		<script type="text/javascript">
+			var state = {
+				version: 1,
+				win: null, time_B: false, time_E: false,
+				mid_farm: false, letter: null,
+				farm: false, queen: false, skrall: false, witch: false
+			};
+		</script>
 		<main>
 			<header>
 				<h1>Legend 6: A Strange Wind</h1>
@@ -233,7 +241,7 @@
 				<!-- end states -->
 				<div data-requirements="letter === 'prince' && win === true">
 					<p class="story">The Dragon Queen lets out a terrifying scream that shakes the earth. Sounds of distress can be heard from all around as the keepers of the Tree of Songs tire from a hard-fought battle. Then, the shaking subsides and the Queen falls to her knees and reverts to her human form. A cool wind blows through the woods and light begins to filter back into the glade. On the breeze a calm, clear voice whispers, &ldquo;it is done. I am free.&rdquo; The Queen looks up and screams as the wind envelops her, whirling around her body and turning her skin to ash and dust.; the wind then rushes away through the forest to where Reka&rsquo;s body must be, giving the heroes hope that she is still alive.</p>
-					<p class="end-message-message win">The Dragon Queen is Defeated!</p>
+					<p class="end-message win">The Dragon Queen is Defeated!</p>
 				</div>
 				<div data-requirements="letter === 'castle' && win === true">
 					<p class="story">The Mad Prince lets out a terrifying scream that shakes the foundations of the castle. Sounds of distress can be heard from outside as confused soldiers and peasants run for their lives to avoid falling rubble. Then, the shaking subsides and the prince falls to his knees. A cool wind blows through the window and light begins to filter back into the room. On the breeze the heroes hear a calm voice whisper, &ldquo;it is done. I am free.&rdquo; The price looks up with tear-strewn eyes into the direction of the wind. &ldquo;I am...sorry,&rdquo; he whispers between ragged breaths and sobs. The wind surrounds him in an embrace and he smiles as it whirls around him, turning his skin into ash and dust; the wind then rushes back into Reka&rsquo;s body, giving the heroes hope that she may still be alive.</p>
