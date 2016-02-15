@@ -1,0 +1,109 @@
+<!doctype html><meta name="viewport" content="width=device-width;" />
+<form>
+<style>
+	body {font-family:sans-serif; font-size:1.2em;}
+
+	#results {list-style:none; padding:0;}
+
+	#narration, #question {width:100%; padding:0.5em;}
+	#narration {min-height:5em;}
+	#controls {text-align:right;}
+
+	#narration, #question, #controls, #results p {margin: 0.25em 0;}
+	.scene {padding-top:0.25em;}
+	
+	textarea, input {font:inherit;}
+
+	.narration {}
+	.question {padding-left:1em; font-weight:bold;}
+	.scene {border-top:1px solid black;}
+</style>
+
+<div id="results"></div>
+<div id="narration-inputs" style="display:none;">
+	<textarea id="narration"></textarea><input type="text" id="question" />
+</div>
+
+<p id="controls">
+	Based on <a href="http://tinysolitarysoldiers.blogspot.co.uk/2012/04/solo-rpg.html" target="_blank">Tiny Solitary Soldiers' DIY Solo RPG</a>
+	<label for="narrate">Narrate? </label><input type="checkbox" id="narrate" onchange="changeConfig()" />
+	<input type="submit" value="Next Beat" autocomplete="off" />
+	<input type="button" onclick="nextScene()" value="Next Scene" autocomplete="off" autocorrect="off" />
+</p>
+
+<script>
+	var results = document.getElementById("results"),
+		narration = document.getElementById("narration"),
+		question = document.getElementById("question");
+
+	window.onsubmit = function() { nextBeat(); return false; };
+
+	function addNarration(renderQuestion) {
+		if (!narrate.checked) { return; }
+		if (!narration.value || (renderQuestion && !question.value)) { alert("Please input some narration."); return false; }
+		
+		var newLI = results.appendChild(document.createElement("P"));
+		newLI.className = "narration";
+
+		var n = newLI.appendChild(document.createElement("SPAN"));
+		n.innerText = narration.value;
+		n.className = "text";
+		narration.value = "";
+
+		if (renderQuestion) {
+			newLI.appendChild(document.createTextNode(" "));
+
+			var q = newLI.appendChild(document.createElement("SPAN"));
+			q.innerText = question.value;
+			q.className = "question";
+			question.value = "";
+		}
+
+		return true;
+	}
+
+	function nextBeat() {
+		if (addNarration(true) === false) { return false; }
+
+		var result = "";
+		result += "<strong>" + "No, No And, No But, Yes, Yes And, Yes But".split(", ")[Math.random() * 6 | 0] + "...</strong>";
+		if (Math.random() < 1/6) {
+			result += " <strong>Twist!</strong> " +
+				"NPC, PC, Organisation, Physical event, Emotional event, Item".split(", ")[Math.random() * 6 | 0] + " " +
+				"appears, alters the location, helps the hero, hinders the hero, changes the goal, ends the scene".split(", ")[Math.random() * 6 | 0];
+		}
+		var beatLI = results.appendChild(document.createElement("P"));
+		beatLI.innerHTML = result;
+		beatLI.className = "beat";
+
+		return false;
+	}
+
+	function nextScene() {
+		if (addNarration() === false) { return; }
+
+		var result = "Scene: <strong>";
+		
+		var roll = Math.random();
+		if (roll < 3/6) { result += "Dramatic Scene"; }
+		else if (roll < 5/6) { result += "Quiet Scene"; }
+		else { result += "Meanwhile..."; }
+		
+		var sceneLI = results.appendChild(document.createElement("P"));
+		sceneLI.innerHTML = result;
+		sceneLI.className = "scene";
+
+		result += "</strong>";
+	}
+
+	var narrate = document.getElementById("narrate");
+	narrate.inputs = document.getElementById("narration-inputs");
+	function changeConfig() {
+		if (narrate.checked) {
+			narrate.inputs.style.display = "block";
+		}
+		else {
+			narrate.inputs.style.display = "none";
+		}
+	}
+</script>
