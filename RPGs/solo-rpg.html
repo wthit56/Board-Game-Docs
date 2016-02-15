@@ -1,4 +1,4 @@
-<!doctype html><meta name="viewport" content="width=device-width;" />
+<!doctype html><meta name="viewport" content="width=device-width" />
 <form>
 <style>
 	body {font-family:sans-serif; font-size:1.2em;}
@@ -35,7 +35,8 @@
 	var results = document.getElementById("results"),
 		narration = document.getElementById("narration"),
 		question = document.getElementById("question");
-
+	var controls = document.getElementById("controls");
+		
 	window.onsubmit = function() { nextBeat(); return false; };
 
 	function addNarration(renderQuestion) {
@@ -72,10 +73,13 @@
 				"NPC, PC, Organisation, Physical event, Emotional event, Item".split(", ")[Math.random() * 6 | 0] + " " +
 				"appears, alters the location, helps the hero, hinders the hero, changes the goal, ends the scene".split(", ")[Math.random() * 6 | 0];
 		}
+		
 		var beatLI = results.appendChild(document.createElement("P"));
 		beatLI.innerHTML = result;
 		beatLI.className = "beat";
 
+		(controls.scrollIntoViewIfNeeded || controls.scrollIntoView).call(controls);
+		
 		return false;
 	}
 
@@ -88,12 +92,14 @@
 		if (roll < 3/6) { result += "Dramatic Scene"; }
 		else if (roll < 5/6) { result += "Quiet Scene"; }
 		else { result += "Meanwhile..."; }
+
+		result += "</strong>";
 		
 		var sceneLI = results.appendChild(document.createElement("P"));
 		sceneLI.innerHTML = result;
 		sceneLI.className = "scene";
-
-		result += "</strong>";
+		
+		(controls.scrollIntoViewIfNeeded || controls.scrollIntoView).call(controls);
 	}
 
 	var narrate = document.getElementById("narrate");
