@@ -21,14 +21,16 @@
 
 <div id="results"></div>
 <div id="narration-inputs" style="display:none;">
-	<textarea id="narration"></textarea><input type="text" id="question" />
+	<textarea id="narration" autocomplete="off" autocorrect="off"></textarea>
+	<input type="text" id="question" autocomplete="off" autocorrect="off" />
 </div>
 
 <p id="controls">
 	Based on <a href="http://tinysolitarysoldiers.blogspot.co.uk/2012/04/solo-rpg.html" target="_blank">Tiny Solitary Soldiers' DIY Solo RPG</a>
 	<label for="narrate">Narrate? </label><input type="checkbox" id="narrate" onchange="changeConfig()" />
-	<input type="submit" value="Next Beat" autocomplete="off" />
-	<input type="button" onclick="nextScene()" value="Next Scene" autocomplete="off" autocorrect="off" />
+	<input type="button" onclick="nextPrompt()" value="Prompt" />
+	<input type="submit" value="Next Beat" />
+	<input type="button" onclick="nextScene()" value="Next Scene" />
 </p>
 
 <script>
@@ -69,9 +71,8 @@
 		var result = "";
 		result += "<strong>" + "No, No And, No But, Yes, Yes And, Yes But".split(", ")[Math.random() * 6 | 0] + "...</strong>";
 		if (Math.random() < 1/6) {
-			result += " <strong>Twist!</strong> " +
-				"NPC, PC, Organisation, Physical event, Emotional event, Item".split(", ")[Math.random() * 6 | 0] + " " +
-				"appears, alters the location, helps the hero, hinders the hero, changes the goal, ends the scene".split(", ")[Math.random() * 6 | 0];
+			result += " <strong>Twist!</strong> <span class='prompt'>" +
+				genPrompt() + "</span>";
 		}
 		
 		var beatLI = results.appendChild(document.createElement("P"));
@@ -100,6 +101,21 @@
 		sceneLI.className = "scene";
 		
 		(controls.scrollIntoViewIfNeeded || controls.scrollIntoView).call(controls);
+	}
+
+	function nextPrompt() {
+		if (addNarration() === false) { return; }
+		
+		var promptLI = results.appendChild(document.createElement("P"));
+		promptLI.innerText = genPrompt();
+		promptLI.className = "prompt";
+		
+		(controls.scrollIntoViewIfNeeded || controls.scrollIntoView).call(controls);
+	}
+
+	function genPrompt() {
+		return "NPC, PC, Organisation, Physical event, Emotional event, Item".split(", ")[Math.random() * 6 | 0] + " " +
+		"appears, alters the location, helps the hero, hinders the hero, changes the goal, ends the scene".split(", ")[Math.random() * 6 | 0];
 	}
 
 	var narrate = document.getElementById("narrate");
